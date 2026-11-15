@@ -1,0 +1,32 @@
+name: Snapshot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run snapshot
+      - name: Commit snapshot when it changed
+        run: |
+          if git diff --quiet -- src/data/snapshot.json; then exit 0; fi
+          git config user.name "ikdaro-bot"
+          git config user.email "ikdaro-bot@users.noreply.github.com"
+          git add src/data/snapshot.json
+          git commit -m "chore: refresh snapshot"
+          git push

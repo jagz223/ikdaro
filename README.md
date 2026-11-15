@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ikdaro 읽다로
 
-## Getting Started
+Mi lista de mangas: los últimos capítulos gratuitos de las series que sigo en Asura Scans, Demonic Scans y Weeb Central, ordenados por la salida más reciente, con marcas de leído guardadas en el navegador.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Next.js 16 (App Router, Cache Components) · TypeScript estricto · Tailwind CSS 4 · Motion · cheerio · zod · Vitest.
+
+## Scripts
+
+| Comando | Qué hace |
+| --- | --- |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` / `npm start` | Build de producción y servidor |
+| `npm test` | Tests de parsers y reglas de dominio |
+| `npm run lint` / `npm run typecheck` | ESLint y TypeScript |
+| `npm run snapshot` | Lee las tres fuentes y escribe `src/data/snapshot.json` |
+
+## Arquitectura
+
+```
+src/domain           Tipos, contrato SeriesSourceReader, reglas de capítulos
+src/application      Casos de uso cacheados (feed y detalle) y armado de vistas
+src/infrastructure   HTTP con cola por host y reintentos, un lector por sitio, snapshot
+src/config/catalog   Las series y su referencia en cada sitio
+src/features         Progreso de lectura, tema, idioma, reloj relativo
+src/i18n             Diccionarios ES / EN tipados
+src/ui/components    Interfaz
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Añadir un sitio nuevo: crear un lector que cumpla `SeriesSourceReader`, registrarlo en `live-readers.ts` y añadir su id en `domain/source.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Añadir una serie: una entrada en `src/config/catalog.ts`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Datos y caché
 
-## Learn More
+Las páginas se prerenderizan y se regeneran cada 30 minutos (`cacheLife("sources")`). Weeb Central se consulta de a una petición y respeta `Retry-After` ante un 429. Los capítulos de Asura con candado o de pago no se muestran.
 
-To learn more about Next.js, take a look at the following resources:
+Las portadas pasan por `/api/cover`, que solo acepta los tres dominios de portadas y queda cacheado una semana en la CDN.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Despliegue en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Sube el repo a GitHub e impórtalo en Vercel (plan Hobby). No necesita variables de entorno.
+2. Listo: modo `live`.
 
-## Deploy on Vercel
+### Plan B si Cloudflare bloquea a Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Síntoma: en la web aparece “Este sitio no respondió” de forma permanente en una fuente.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Haz el repo público (minutos de GitHub Actions ilimitados) o revisa tu cuota.
+2. En `.github/workflows/snapshot.yml` añade el horario bajo `on:`:
+   ```yaml
+   schedule:
+     - cron: "*/30 * * * *"
+   ```
+3. En Vercel → Settings → Environment Variables añade `DATA_MODE=snapshot` y redespliega.
+
+El workflow regenera `src/data/snapshot.json` y hace commit solo si cambió; cada commit redespliega Vercel.

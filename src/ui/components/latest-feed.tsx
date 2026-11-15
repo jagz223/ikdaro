@@ -48,7 +48,7 @@ export function LatestFeed({ views }: { views: SeriesView[] }) {
     <section aria-labelledby="feed-heading" className="mx-auto mt-28 max-w-[1440px] scroll-mt-24 px-4 sm:px-8">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
         <div>
-          <HangulHeading id="feed-heading" hangul="최신화" label={t.feed.heading} romanized="choesinhwa" />
+          <HangulHeading id="feed-heading" hangul="최신화" label={t.feed.heading} />
           <p className={`mt-6 text-lg font-bold ${pendingCount > 0 ? "text-lacquer" : "text-jade"}`}>
             {t.feed.finding(pendingCount, views.length)}
           </p>

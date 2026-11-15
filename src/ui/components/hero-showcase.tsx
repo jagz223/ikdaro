@@ -161,7 +161,7 @@ export function HeroShowcase({ views }: { views: SeriesView[] }) {
               className="saekdong mt-4 block h-[10px] w-full origin-left"
             />
             <p className="mt-3 text-base font-medium text-ink-muted">
-              ({t.hero.newArrival} · <span className="italic">singan</span>)
+              ({t.hero.newArrival})
             </p>
           </div>
           <AnimatePresence mode="wait" initial={false}>

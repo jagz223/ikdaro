@@ -6,12 +6,11 @@ interface HangulHeadingProps {
   id: string;
   hangul: string;
   label: string;
-  romanized?: string;
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export function HangulHeading({ id, hangul, label, romanized }: HangulHeadingProps) {
+export function HangulHeading({ id, hangul, label }: HangulHeadingProps) {
   return (
     <h2 id={id} className="inline-flex flex-col items-start">
       <motion.span
@@ -34,14 +33,7 @@ export function HangulHeading({ id, hangul, label, romanized }: HangulHeadingPro
         className="mt-3 block h-[5px] w-full origin-left bg-ink"
       />
       <span className="mt-3 text-base font-medium text-ink-muted">
-        ({label}
-        {romanized && (
-          <>
-            {" · "}
-            <span className="italic">{romanized}</span>
-          </>
-        )}
-        )
+        ({label})
       </span>
     </h2>
   );

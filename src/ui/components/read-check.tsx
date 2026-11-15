@@ -15,6 +15,7 @@ export function ReadCheck({ checked, label, onChange }: ReadCheckProps) {
       role="checkbox"
       aria-checked={checked}
       aria-label={label}
+      title={label}
       onClick={() => onChange(!checked)}
       className="group relative grid size-8 shrink-0 cursor-pointer place-items-center"
     >

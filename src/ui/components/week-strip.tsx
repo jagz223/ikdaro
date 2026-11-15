@@ -6,7 +6,7 @@ import type { Release } from "@/domain/releases";
 import { DAY_MS } from "@/features/time/relative-time";
 import { useNow } from "@/features/time/use-now";
 import { useDictionary } from "@/i18n/use-dictionary";
-import { KOREAN_WEEKDAYS, koreanChapter } from "@/ui/format/east-asian";
+import { KOREAN_WEEKDAYS } from "@/ui/format/east-asian";
 import { Cover } from "./cover";
 import { HangulHeading } from "./hangul-heading";
 
@@ -61,6 +61,7 @@ function DayCard({ day, index }: { day: DayColumn; index: number }) {
         </span>
         <span className="text-right text-xs leading-tight">
           <span className="block tabular-nums">{day.date.toLocaleDateString(language, { day: "numeric", month: "short" })}</span>
+          <span className="block capitalize opacity-70">{day.date.toLocaleDateString(language, { weekday: "long" })}</span>
           {day.isToday && <span className="mt-1 block font-bold underline decoration-2 underline-offset-2">{t.week.today}</span>}
         </span>
       </div>
@@ -80,7 +81,7 @@ function DayCard({ day, index }: { day: DayColumn; index: number }) {
                 </span>
                 <span className="min-w-0">
                   <span className="line-clamp-1 text-sm font-bold group-hover:underline">{view.title}</span>
-                  <span lang="ko" className="font-myeongjo text-xs font-bold opacity-70">{koreanChapter(chapter)}</span>
+                  <span className="block text-xs font-bold opacity-70">{t.chapter.name(chapter)}</span>
                 </span>
               </Link>
             </li>
@@ -101,7 +102,7 @@ export function WeekStrip({ releases }: { releases: Release[] }) {
   return (
     <section aria-labelledby="week-heading" className="mx-auto mt-24 max-w-[1440px] scroll-mt-24 px-4 sm:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <HangulHeading id="week-heading" hangul="이번 주" label={t.week.heading} romanized="ibeon ju" />
+        <HangulHeading id="week-heading" hangul="이번 주" label={t.week.heading} />
         {now !== undefined && <p className="text-base font-medium">{t.week.finding(total)}</p>}
       </div>
       <ol className="mt-10 flex snap-x snap-mandatory overflow-x-auto border-[1.5px] border-ink [scrollbar-width:thin] lg:grid lg:grid-cols-7 lg:overflow-visible">

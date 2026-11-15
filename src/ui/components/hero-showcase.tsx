@@ -158,7 +158,7 @@ export function HeroShowcase({ views }: { views: SeriesView[] }) {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1, ease: EASE, delay: 0.2 }}
-              className="saekdong mt-4 block h-[10px] w-full origin-left"
+              className="mt-4 block h-[5px] w-full origin-left bg-ink"
             />
             <p className="mt-3 text-base font-medium text-ink-muted">
               ({t.hero.newArrival})

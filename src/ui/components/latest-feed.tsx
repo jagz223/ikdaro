@@ -7,7 +7,7 @@ import { latestChapter, sourceIdsOf } from "@/domain/series-selectors";
 import { SOURCE_IDS, SOURCE_LABELS, type SourceId } from "@/domain/source";
 import { useReadProgress } from "@/features/read-progress/read-progress";
 import { useDictionary } from "@/i18n/use-dictionary";
-import { KanjiHeading } from "./kanji-heading";
+import { HangulHeading } from "./hangul-heading";
 import { SeriesCard } from "./series-card";
 
 type SourceFilter = SourceId | "all";
@@ -48,7 +48,7 @@ export function LatestFeed({ views }: { views: SeriesView[] }) {
     <section aria-labelledby="feed-heading" className="mx-auto mt-28 max-w-[1440px] scroll-mt-24 px-4 sm:px-8">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
         <div>
-          <KanjiHeading id="feed-heading" kanji="最新話" label={t.feed.heading} korean="최신화" />
+          <HangulHeading id="feed-heading" hangul="최신화" label={t.feed.heading} romanized="choesinhwa" />
           <p className={`mt-6 text-lg font-bold ${pendingCount > 0 ? "text-lacquer" : "text-jade"}`}>
             {t.feed.finding(pendingCount, views.length)}
           </p>

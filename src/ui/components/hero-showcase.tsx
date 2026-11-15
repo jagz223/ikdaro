@@ -8,14 +8,14 @@ import { feedOf, latestChapter, sourceIdsOf } from "@/domain/series-selectors";
 import { SOURCE_LABELS } from "@/domain/source";
 import { useReadProgress } from "@/features/read-progress/read-progress";
 import { useDictionary } from "@/i18n/use-dictionary";
-import { japaneseChapter, koreanChapter, scriptOf } from "@/ui/format/east-asian";
+import { koreanChapter, scriptOf } from "@/ui/format/east-asian";
 import { Cover } from "./cover";
 import { ElapsedCounter } from "./elapsed-counter";
 import { RelativeTime } from "./relative-time";
 
 const SLIDE_MS = 9000;
 const EASE = [0.22, 1, 0.36, 1] as const;
-const KANJI_NUMERALS = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+const HANGUL_NUMERALS = ["일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십"];
 
 const stagger: Variants = {
   enter: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
@@ -46,16 +46,16 @@ function SlideDetails({ view }: { view: SeriesView }) {
         </motion.div>
       )}
       <motion.div variants={rise} className="flex flex-col gap-3">
-        <h2 className="font-mincho text-[clamp(2rem,4vw,3.6rem)] leading-[1.02] font-medium tracking-[-0.01em] text-balance">
+        <h2 className="font-myeongjo text-[clamp(2rem,4vw,3.6rem)] leading-[1.02] font-medium tracking-[-0.01em] text-balance">
           <Link href={`/series/${view.slug}`} className="transition-colors hover:text-lacquer">
             {view.title}
           </Link>
         </h2>
         {chapter && (
           <p className="text-lg">
-            <span lang="ja" className="font-mincho font-bold text-lacquer">{japaneseChapter(chapter)}</span>
+            <span lang="ko" className="font-myeongjo font-bold text-lacquer">{koreanChapter(chapter)}</span>
             <span className="text-ink-muted">
-              {" "}({t.chapter.name(chapter)} · <span lang="ko">{koreanChapter(chapter)}</span>)
+              {" "}({t.chapter.name(chapter)})
             </span>
           </p>
         )}
@@ -106,7 +106,7 @@ function SlideCover({ view }: { view: SeriesView }) {
       {view.nativeTitle && (
         <p
           lang={scriptOf(view.nativeTitle)}
-          className="vertical-text absolute top-0 -left-9 hidden max-h-full overflow-hidden font-mincho text-base font-bold tracking-[0.3em] text-ink-muted sm:block"
+          className="vertical-text absolute top-0 -left-9 hidden max-h-full overflow-hidden font-myeongjo text-base font-bold tracking-[0.3em] text-ink-muted sm:block"
         >
           {view.nativeTitle}
         </p>
@@ -150,18 +150,18 @@ export function HeroShowcase({ views }: { views: SeriesView[] }) {
 
         <div className="flex flex-col justify-between gap-10 p-6 sm:p-10 lg:p-12">
           <div>
-            <p aria-hidden="true" lang="ja" className="spaced-kana text-[clamp(4.5rem,13vw,12rem)] leading-[0.92] font-black">
-              新着
+            <p aria-hidden="true" lang="ko" className="spaced-hangul text-[clamp(4.5rem,13vw,12rem)] leading-[0.92] font-black">
+              신간
             </p>
             <motion.span
               aria-hidden="true"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1, ease: EASE, delay: 0.2 }}
-              className="mt-4 block h-[5px] w-full origin-left bg-ink"
+              className="saekdong mt-4 block h-[10px] w-full origin-left"
             />
             <p className="mt-3 text-base font-medium text-ink-muted">
-              ({t.hero.newArrival} · <span lang="ko">신작</span>)
+              ({t.hero.newArrival} · <span className="italic">singan</span>)
             </p>
           </div>
           <AnimatePresence mode="wait" initial={false}>
@@ -193,11 +193,11 @@ export function HeroShowcase({ views }: { views: SeriesView[] }) {
                         <Cover src={view.coverUrl} title="" className={`h-full w-full transition-opacity ${selected ? "opacity-100" : "opacity-60 group-hover:opacity-100"}`} />
                       </span>
                       <span
-                        lang="ja"
+                        lang="ko"
                         aria-hidden="true"
-                        className={`font-mincho text-sm font-bold ${selected ? "text-lacquer underline decoration-2 underline-offset-4" : "text-ink-faint group-hover:text-ink"}`}
+                        className={`font-myeongjo text-sm font-bold ${selected ? "text-lacquer underline decoration-2 underline-offset-4" : "text-ink-faint group-hover:text-ink"}`}
                       >
-                        {KANJI_NUMERALS[slideIndex]}
+                        {HANGUL_NUMERALS[slideIndex]}
                       </span>
                       {selected && (
                         <motion.span

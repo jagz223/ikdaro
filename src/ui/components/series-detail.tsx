@@ -68,7 +68,7 @@ export function SeriesDetail({ view }: { view: SeriesView }) {
                 <motion.p
                   {...rise(0.3)}
                   lang={/[가-힣]/.test(view.nativeTitle) ? "ko" : "ja"}
-                  className="vertical-text absolute top-4 -right-3 max-h-[85%] overflow-hidden rounded-[3px] bg-lacquer px-2 py-3 font-mincho text-lg leading-none font-bold tracking-[0.12em] text-lacquer-ink"
+                  className="vertical-text absolute top-4 -right-3 max-h-[85%] overflow-hidden rounded-[3px] bg-lacquer px-2 py-3 font-myeongjo text-lg leading-none font-bold tracking-[0.12em] text-lacquer-ink"
                 >
                   {view.nativeTitle}
                 </motion.p>
@@ -124,7 +124,7 @@ export function SeriesDetail({ view }: { view: SeriesView }) {
           <div className="min-w-0">
             <motion.h1
               {...rise(0.05)}
-              className="font-mincho text-[clamp(2.5rem,5.5vw,5rem)] leading-[1] font-medium tracking-[-0.01em] text-balance"
+              className="font-myeongjo text-[clamp(2.5rem,5.5vw,5rem)] leading-[1] font-medium tracking-[-0.01em] text-balance"
             >
               {view.title}
             </motion.h1>

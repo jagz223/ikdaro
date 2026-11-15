@@ -6,9 +6,9 @@ import type { Release } from "@/domain/releases";
 import { DAY_MS } from "@/features/time/relative-time";
 import { useNow } from "@/features/time/use-now";
 import { useDictionary } from "@/i18n/use-dictionary";
-import { JAPANESE_WEEKDAYS, KOREAN_WEEKDAYS, japaneseChapter } from "@/ui/format/east-asian";
+import { KOREAN_WEEKDAYS, koreanChapter } from "@/ui/format/east-asian";
 import { Cover } from "./cover";
-import { KanjiHeading } from "./kanji-heading";
+import { HangulHeading } from "./hangul-heading";
 
 const DAYS_SHOWN = 7;
 const MAX_PER_DAY = 4;
@@ -56,12 +56,11 @@ function DayCard({ day, index }: { day: DayColumn; index: number }) {
       }`}
     >
       <div className="flex items-start justify-between">
-        <span lang="ja" className="text-5xl leading-none font-black">
-          {JAPANESE_WEEKDAYS[weekday]}
+        <span lang="ko" className="text-5xl leading-none font-black">
+          {KOREAN_WEEKDAYS[weekday]}
         </span>
         <span className="text-right text-xs leading-tight">
           <span className="block tabular-nums">{day.date.toLocaleDateString(language, { day: "numeric", month: "short" })}</span>
-          <span lang="ko" className="block opacity-70">({KOREAN_WEEKDAYS[weekday]})</span>
           {day.isToday && <span className="mt-1 block font-bold underline decoration-2 underline-offset-2">{t.week.today}</span>}
         </span>
       </div>
@@ -69,7 +68,7 @@ function DayCard({ day, index }: { day: DayColumn; index: number }) {
 
       {day.releases.length === 0 ? (
         <p className="mt-5 text-sm opacity-60">
-          <span lang="ja" className="mr-2 font-mincho text-xl">休</span>({t.week.empty})
+          <span lang="ko" className="mr-2 font-myeongjo text-xl">휴</span>({t.week.empty})
         </p>
       ) : (
         <ul className="mt-4 flex flex-col gap-3">
@@ -81,7 +80,7 @@ function DayCard({ day, index }: { day: DayColumn; index: number }) {
                 </span>
                 <span className="min-w-0">
                   <span className="line-clamp-1 text-sm font-bold group-hover:underline">{view.title}</span>
-                  <span lang="ja" className="font-mincho text-xs font-bold opacity-70">{japaneseChapter(chapter)}</span>
+                  <span lang="ko" className="font-myeongjo text-xs font-bold opacity-70">{koreanChapter(chapter)}</span>
                 </span>
               </Link>
             </li>
@@ -102,7 +101,7 @@ export function WeekStrip({ releases }: { releases: Release[] }) {
   return (
     <section aria-labelledby="week-heading" className="mx-auto mt-24 max-w-[1440px] scroll-mt-24 px-4 sm:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <KanjiHeading id="week-heading" kanji="今週" label={t.week.heading} korean="이번 주" />
+        <HangulHeading id="week-heading" hangul="이번 주" label={t.week.heading} romanized="ibeon ju" />
         {now !== undefined && <p className="text-base font-medium">{t.week.finding(total)}</p>}
       </div>
       <ol className="mt-10 flex snap-x snap-mandatory overflow-x-auto border-[1.5px] border-ink [scrollbar-width:thin] lg:grid lg:grid-cols-7 lg:overflow-visible">

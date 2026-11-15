@@ -17,9 +17,9 @@ export function Cover({ src, title, className = "", eager = false }: CoverProps)
       <div
         role="img"
         aria-label={title}
-        className={`grid place-items-center bg-surface-raised font-mincho text-3xl text-ink-faint ${className}`}
+        className={`grid place-items-center bg-surface-raised font-myeongjo text-3xl text-ink-faint ${className}`}
       >
-        漫
+        만
       </div>
     );
   }

@@ -1,29 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Serif_KR, Shippori_Mincho_B1, Zen_Kaku_Gothic_New } from "next/font/google";
+import { Gothic_A1, Nanum_Myeongjo } from "next/font/google";
 import { LANGUAGE_KEY, THEME_KEY } from "@/features/preferences/keys";
 import { es } from "@/i18n/es";
 import { SiteFooter } from "@/ui/components/site-footer";
 import { SiteHeader } from "@/ui/components/site-header";
 import "./globals.css";
 
-const gothic = Zen_Kaku_Gothic_New({
+const gothic = Gothic_A1({
   variable: "--font-gothic",
   weight: ["400", "500", "700", "900"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const mincho = Shippori_Mincho_B1({
-  variable: "--font-mincho",
-  weight: ["500", "700", "800"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const serifKorean = Noto_Serif_KR({
-  variable: "--font-serif-kr",
-  weight: ["700"],
+const myeongjo = Nanum_Myeongjo({
+  variable: "--font-myeongjo",
+  weight: ["400", "700", "800"],
   subsets: ["latin"],
   display: "swap",
   preload: false,
@@ -45,7 +37,7 @@ const preferencesScript = `try{var d=document.documentElement,t=localStorage.get
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" data-theme="dark" suppressHydrationWarning className={`${gothic.variable} ${mincho.variable} ${serifKorean.variable}`}>
+    <html lang="es" data-theme="dark" suppressHydrationWarning className={`${gothic.variable} ${myeongjo.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: preferencesScript }} />
       </head>

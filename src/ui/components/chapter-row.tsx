@@ -6,7 +6,7 @@ import { useReadProgress } from "@/features/read-progress/read-progress";
 import { isRecent } from "@/features/time/relative-time";
 import { useNow } from "@/features/time/use-now";
 import { useDictionary } from "@/i18n/use-dictionary";
-import { japaneseChapter } from "@/ui/format/east-asian";
+import { koreanChapter } from "@/ui/format/east-asian";
 import { ReadCheck } from "./read-check";
 import { RelativeTime } from "./relative-time";
 
@@ -41,17 +41,17 @@ export function ChapterRow({ seriesSlug, chapter, sourceId, size = "compact" }: 
         className="flex min-w-0 flex-1 items-baseline gap-2 rounded-sm sm:gap-2.5"
       >
         <span
-          lang="ja"
-          className={`shrink-0 font-mincho text-[0.95rem] font-bold sm:text-[1.05rem] transition-colors ${
+          lang="ko"
+          className={`shrink-0 font-myeongjo text-[0.95rem] font-bold sm:text-[1.05rem] transition-colors ${
             read ? "text-ink-faint" : "text-ink group-hover/row:text-lacquer"
           }`}
         >
-          {japaneseChapter(chapter)}
+          {koreanChapter(chapter)}
         </span>
         <span className={`hidden truncate text-sm sm:inline ${read ? "text-ink-faint" : "text-ink-muted"}`}>{name}</span>
         {fresh && (
           <span className="relative shrink-0 -translate-y-0.5 rounded-[10px] bg-lacquer px-2 py-0.5 text-[0.7rem] leading-none font-black text-lacquer-ink after:absolute after:-bottom-1 after:left-2 after:size-2 after:rotate-45 after:bg-lacquer">
-            <span lang="ja">新</span><span className="hidden sm:inline"> {t.chapter.isNew}</span>
+            <span lang="ko">새</span><span className="hidden sm:inline"> {t.chapter.isNew}</span>
           </span>
         )}
         <span aria-hidden="true" className="toc-leader" />

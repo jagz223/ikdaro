@@ -2,28 +2,28 @@
 
 import { motion } from "motion/react";
 
-interface KanjiHeadingProps {
+interface HangulHeadingProps {
   id: string;
-  kanji: string;
+  hangul: string;
   label: string;
-  korean?: string;
+  romanized?: string;
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export function KanjiHeading({ id, kanji, label, korean }: KanjiHeadingProps) {
+export function HangulHeading({ id, hangul, label, romanized }: HangulHeadingProps) {
   return (
     <h2 id={id} className="inline-flex flex-col items-start">
       <motion.span
         aria-hidden="true"
-        lang="ja"
+        lang="ko"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: EASE }}
-        className="spaced-kana text-[clamp(2.75rem,7vw,6rem)] leading-[1] font-black"
+        className="spaced-hangul text-[clamp(2.75rem,7vw,6rem)] leading-[1] font-black"
       >
-        {kanji}
+        {hangul}
       </motion.span>
       <motion.span
         aria-hidden="true"
@@ -35,10 +35,10 @@ export function KanjiHeading({ id, kanji, label, korean }: KanjiHeadingProps) {
       />
       <span className="mt-3 text-base font-medium text-ink-muted">
         ({label}
-        {korean && (
+        {romanized && (
           <>
             {" · "}
-            <span lang="ko">{korean}</span>
+            <span className="italic">{romanized}</span>
           </>
         )}
         )

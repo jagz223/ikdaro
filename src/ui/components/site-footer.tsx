@@ -17,10 +17,10 @@ export function SiteFooter() {
     <footer className="mt-32 px-4 pb-8 sm:px-8">
       <div className="mx-auto grid max-w-[1440px] border-[1.5px] border-ink md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="bg-ink p-8 text-ground sm:p-12">
-          <p lang="ko" aria-hidden="true" className="spaced-kana text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] font-black">
+          <p lang="ko" aria-hidden="true" className="spaced-hangul text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] font-black">
             읽다로
           </p>
-          <span aria-hidden="true" className="mt-4 block h-[5px] w-full bg-ground" />
+          <span aria-hidden="true" className="saekdong mt-4 block h-[10px] w-full" />
           <p className="mt-4 text-base">({t.header.tagline} · <span lang="ko">내 만화 목록</span>)</p>
           <p className="mt-10 max-w-md text-sm leading-relaxed opacity-80">{t.footer.note}</p>
         </div>

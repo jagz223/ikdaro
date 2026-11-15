@@ -11,10 +11,10 @@
   --ink: #e6e3dc;
   --ink-muted: #aaa69e;
   --ink-faint: #706d67;
-  --lacquer: #f0603c;
+  --lacquer: #e8493f;
   --lacquer-ink: #151515;
   --gold: #c9a36a;
-  --jade: #5cc488;
+  --jade: #7cc4ad;
   --jade-ink: #151515;
   --scrim: 21 21 21;
   --paper-opacity: 0.22;
@@ -30,10 +30,10 @@
   --ink: #161616;
   --ink-muted: #4f4c47;
   --ink-faint: #7f7b74;
-  --lacquer: #a8320c;
+  --lacquer: #a8261f;
   --lacquer-ink: #fff6f0;
   --gold: #a07a3e;
-  --jade: #17633a;
+  --jade: #1d6b5a;
   --jade-ink: #ffffff;
   --scrim: 217 214 207;
   --paper-opacity: 0.4;
@@ -55,7 +55,7 @@
   --color-jade: var(--jade);
   --color-jade-ink: var(--jade-ink);
   --font-sans: var(--font-gothic), "Noto Sans KR", system-ui, sans-serif;
-  --font-mincho: var(--font-mincho), var(--font-serif-kr), "Noto Serif KR", serif;
+  --font-myeongjo: var(--font-myeongjo), "Noto Serif KR", serif;
   --ease-ink: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -119,7 +119,7 @@ body::after {
   text-orientation: upright;
 }
 
-.spaced-kana {
+.spaced-hangul {
   letter-spacing: 0.22em;
   margin-right: -0.22em;
 }
@@ -189,4 +189,9 @@ body::after {
   .animate-marquee {
     animation: none;
   }
+}
+
+/* 색동: franjas de los cinco colores tradicionales (obangsaek) */
+@utility saekdong {
+  background: linear-gradient(to bottom, #c8372d 0 20%, #e3a92b 20% 40%, #2f6f9f 40% 60%, var(--ink) 60% 80%, #ece6d8 80% 100%);
 }

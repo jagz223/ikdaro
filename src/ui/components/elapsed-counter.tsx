@@ -5,7 +5,7 @@ import { useDictionary } from "@/i18n/use-dictionary";
 
 const SECOND_MS = 1000;
 const UNIT_SECONDS = [86_400, 3_600, 60, 1] as const;
-const KANJI_UNITS = ["日", "時間", "分", "秒"] as const;
+const HANGUL_UNITS = ["일", "시간", "분", "초"] as const;
 
 function splitElapsed(fromIso: string, now: number): number[] {
   let remaining = Math.max(0, Math.floor((now - new Date(fromIso).getTime()) / SECOND_MS));
@@ -48,7 +48,7 @@ export function ElapsedCounter({ since }: { since: string }) {
         {labels.map((label, index) => (
           <li key={label} className="flex flex-col">
             <span className="link-underline font-medium">{label}</span>
-            <span lang="ja" className="text-xs text-ink-muted">({KANJI_UNITS[index]})</span>
+            <span lang="ko" className="text-xs text-ink-muted">({HANGUL_UNITS[index]})</span>
           </li>
         ))}
       </ul>

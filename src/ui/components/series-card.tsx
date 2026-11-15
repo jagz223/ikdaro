@@ -34,7 +34,7 @@ export function SeriesCard({ view }: { view: SeriesView }) {
           <p
             lang={scriptOf(view.nativeTitle)}
             aria-hidden="true"
-            className="vertical-text hidden max-h-36 overflow-hidden font-mincho text-xs font-bold tracking-[0.25em] text-ink-muted sm:block"
+            className="vertical-text hidden max-h-36 overflow-hidden font-myeongjo text-xs font-bold tracking-[0.25em] text-ink-muted sm:block"
           >
             {view.nativeTitle}
           </p>
@@ -54,16 +54,16 @@ export function SeriesCard({ view }: { view: SeriesView }) {
 
       <div className="flex min-w-0 flex-1 flex-col gap-3">
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-          <h3 className="flex min-w-0 items-baseline gap-2 font-mincho text-xl leading-tight font-medium sm:text-2xl">
+          <h3 className="flex min-w-0 items-baseline gap-2 font-myeongjo text-xl leading-tight font-medium sm:text-2xl">
             <span
-              lang="ja"
+              lang="ko"
               aria-label={pending ? t.feed.pendingBadge : t.feed.caughtUpBadge}
               title={pending ? t.feed.pendingBadge : t.feed.caughtUpBadge}
               className={`grid size-5 shrink-0 -translate-y-0.5 place-items-center font-sans text-[0.65rem] font-black transition-colors duration-500 ${
                 pending ? "bg-lacquer text-lacquer-ink" : "bg-jade text-jade-ink"
               }`}
             >
-              {pending ? "新" : "済"}
+              {pending ? "새" : "완"}
             </span>
             <Link
               href={`/series/${view.slug}`}
